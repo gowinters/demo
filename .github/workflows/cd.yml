@@ -1,9 +1,11 @@
-name: CD Prod
+name: CD Testing
+run-name: "[Manual] @${{ github.actor }} testing variables"
 
 on:
   release:
-    types: [published]
-
+    types: 
+      - published
+      
 jobs:
   print-event:
     runs-on: ubuntu-latest
@@ -12,3 +14,5 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
+      - name: Print variable
+        run: echo ${{ github.event.release.tag_name }}
