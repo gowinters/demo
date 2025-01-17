@@ -1,0 +1,14 @@
+name: CD Prod
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  print-event:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print GitHub Context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
