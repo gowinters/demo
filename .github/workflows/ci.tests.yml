@@ -24,3 +24,10 @@ jobs:
     steps:
     - name: Checkout code
       run: echo "This will run"
+
+  sonarcloud:
+    name: Build and analyze
+    runs-on: windows-latest
+    steps:
+      - name: Set up JDK 17
+        run: echo "This will run"
