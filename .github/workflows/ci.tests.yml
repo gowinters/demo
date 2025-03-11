@@ -1,5 +1,5 @@
 name: "[Auto] CI Tests execution"
-run-name: "Auto: CI testing for branch '${{ github.ref_name }}' ⭐ triggered by ${{github.triggering_actor}}"
+run-name: "${{ github.event_name == 'push' && '[Auto] Auto CI testing for branch:' }} ${{ github.ref_name }} ⭐ By: ${{github.triggering_actor}}"
 
 on:
   push:
