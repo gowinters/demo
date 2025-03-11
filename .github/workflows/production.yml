@@ -20,22 +20,8 @@ permissions:
     packages: read  # This is required to retrieve Nuget from GH Packages
 
 jobs:
-  deploy-production:
-    uses: vas-dev/.github/.github/workflows/cd.dotnet.fargate.reusable.yml@main
-    with:
-      # Feed MS cert settings
-      # drop .gpg since the script adds it, knowing it's necessary for the encrypted file in github
-      # path-to-encrypted-pfx: ./src/Vas.FeedNext/morpheus-production.pfx ==> doesn't exist for Feed.
-      # path-to-encrypted-admin-cer: ./src/Vas.FeedNext/morpheus-admin.cer
-      # .NET API settings
-      domain: feednext-api
-      container-name: FeedNextApi # Vas.Auth.Api project -> VasAuthApi = container name
-      api-directory: src/Vas.FeedNext.Api
-      deployment-environment: prod
-      cluster: pulse-cluster
-      deployment-controller: CodeDeploy
-      image-tag: ${{ github.event.inputs.release_tag }}
-    secrets:
-      oidc-arn: ${{ secrets.ECS_API_AWS_ROLE_PULSE_PROD  }}  # pulse staging OIDC ROLE ARN
-      gpg-pw: ${{ secrets.STAGING_GPG_PW }}
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+  deploy-prod:
+    runs-on: ubuntu-latest
+    steps:
+    - name: This will run
+      run: echo "This will run"
