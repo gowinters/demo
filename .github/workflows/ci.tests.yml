@@ -30,7 +30,6 @@ jobs:
 #      run: dotnet format src/Vas.FeedNext.sln
 
   tests:
-    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -56,7 +55,6 @@ jobs:
     #  run: ./test_subscribers.ps1
 
   postman-tests:
-    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
