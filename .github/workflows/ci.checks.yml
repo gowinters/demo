@@ -1,5 +1,5 @@
 name: "[Auto] CI Checks execution"
-run-name: "Auto: CI checks for branch ${{ github.ref_name }} ⭐ triggered by ${{github.triggering_actor}}"
+run-name: "Auto: CI checks for merge ${{ github.event.pull_request.title }} ⭐ triggered by ${{github.triggering_actor}}"
 
 on:
   pull_request:
