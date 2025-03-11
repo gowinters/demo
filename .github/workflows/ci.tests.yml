@@ -1,5 +1,5 @@
 name: CI Tests
-run-name: "Auto: CI Testing at ${{ github.event_name }} ⭐ triggered by ${{github.triggering_actor}}"
+run-name: "Auto: CI Testing triggered for branch ${{ github.ref_name }} ⭐ triggered by ${{github.triggering_actor}} on ${{ github.event_name }}"
 
 on:
   pull_request:
