@@ -1,5 +1,5 @@
 name: "[Auto/Manual] CD for staging"
-run-name: "${{ github.event_name == 'push' || '[Auto] Auto deployment: 🚀' || github.event_name == 'workflow_dispatch' || '[Manual] Manual deployment: 🚀' }} for staging ⭐ By: ${{github.triggering_actor}}"
+run-name: "${{ github.event_name == 'push' && '[Auto] Auto deployment: 🚀' || '[Manual] Manual deployment: 🚀' }} for prod ⭐ By: ${{github.triggering_actor}}"
 
 on:
   push:
@@ -22,5 +22,5 @@ jobs:
   deploy-staging:
     runs-on: ubuntu-latest
     steps:
-    - name: Run pipeline
+    - name: This will run
       run: echo "This will run"
