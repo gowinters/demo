@@ -1,18 +1,44 @@
-name: CD Testing
-run-name: "[Manual] @${{ github.actor }} testing variables"
+name: CI Tests
+run-name: "Auto: CI Testing at ${{ github.event_name }} ⭐ triggered by ${{github.triggering_actor}}"
 
 on:
-  release:
-    types: 
-      - published
-      
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - release
+      - develop
+  push:
+    branches-ignore:
+      - main
+      - master
+      - release
+      - staging
+      - develop
+    branches:
+      - '*'
+
 jobs:
-  print-event:
+  tests:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - name: Print GitHub Context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Print variable
-        run: echo ${{ github.event.release.tag_name }}
+    - name: Code Checkout
+      run: echo "Run tests"
+
+  postman-tests:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - name: Checkout code
+      run: echo "Run postman tests"
+
+  sonarcloud:
+    if: github.event_name == 'pull_request'
+    name: Build and analyze
+    runs-on: windows-latest
+    steps:
+      - name: Set up JDK 17
+        run: echo "Run sonarcloud tests."
+    
