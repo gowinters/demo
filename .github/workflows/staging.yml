@@ -1,5 +1,5 @@
 name: "[Auto/Manual] CD for staging"
-run-name: "${{ github.event_name == 'push' && '[Auto] Auto deployment: 🚀' || '[Manual] Manual deployment: 🚀' }} for prod ⭐ By: ${{github.triggering_actor}}"
+run-name: "${{ github.event_name == 'push' && '[Auto] Auto deployment: 🚀' || '[Manual] Manual deployment: 🚀' }} for staging ⭐ By: ${{github.triggering_actor}}"
 
 on:
   push:
