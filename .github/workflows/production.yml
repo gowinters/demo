@@ -1,0 +1,27 @@
+name: "[Auto/Manual] CD for production"
+run-name: "${{ github.event_name != 'push' || 'On Merge' }} - Manual: ${{ github.event_name != 'push' }}. ⭐ ${{ github.event_name }} ${{github.triggering_actor}}"
+
+on:
+  push:
+    branches:
+        - main
+        - master
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Release tag to deploy or rollback
+        type: string
+        required: true
+        default: latest
+
+permissions:
+    id-token: write # This is required for aws oidc connection
+    contents: read  # This is required for  actions/checkout
+    packages: read  # This is required to retrieve Nuget from GH Packages
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run pipeline
+      run: echo "This will run"
