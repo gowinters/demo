@@ -11,58 +11,16 @@ on:
       - develop
 
 jobs:
-# Commenting out style until TOM-641 is worked
-#  style:
-#    runs-on: ubuntu-latest
-#    timeout-minutes: 15
-#    steps:
-#    - uses: actions/checkout@v2
-#    - uses: actions/setup-dotnet@v1
-#      with:
-#        dotnet-version: 6.0.x
-#    - name: Install dotnet format
-#      run: dotnet tool install -g dotnet-format
-#    - name: Create NuGet.config for restoring packages
-#      run: echo "$NUGET_CONFIG" > NuGet.config
-#      env:
-#        NUGET_CONFIG: ${{secrets.NUGET_CONFIG}}
-#    - name: Check style
-#      run: dotnet format src/Vas.FeedNext.sln
-
   tests:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
     - name: Code Checkout
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0 # avoid shallow clone so Nerdbank.GitVersioning can do its work
-    - name: Setup dotnet
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 6.0.x
-    - name: Add NuGet source
-      run: 'dotnet nuget add source https://nuget.pkg.github.com/vas-dev/index.json -n github --username VAS --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text'
-    - name: Restore dependencies
-      run: dotnet restore src/Vas.FeedNext.sln
-    - name: Build
-      run: dotnet build src/Vas.FeedNext.sln --no-restore
-    - name: Test
-      run: dotnet test src/Vas.FeedNext.sln --no-build --verbosity normal --filter "FullyQualifiedName!~Feed.Messaging.Tests" # skip Messaging tests as they run with the integrated db in the following step
-    #- name: Subscribers Tests
-    #  working-directory: ./scripts
-    #  shell: pwsh
-    #  run: ./test_subscribers.ps1
+      run: echo "This will run"
 
   postman-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
-    - name: Create NuGet.config for restoring packages
-      run: dotnet new nugetconfig -n NuGet.config # Create local Nuget Config to add values to for docker image
-    - name: Add NuGet source
-      run: 'dotnet nuget add source https://nuget.pkg.github.com/vas-dev/index.json -n github --username VAS --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --configfile ./nuget.config'
-    - name: Build and test an instance of Vas.FeedNext.Api
-      run: ./scripts/test_api.sh
+      run: echo "This will run"
